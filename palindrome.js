@@ -1,3 +1,34 @@
+var userInput = document.querySelector("#input");
+var btnClick = document.querySelector("button");
+var result = document.querySelector("#output");
+
+
+// btnClick.addEventListener("click",clickHandler);
+
+// function clickHandler(){
+//     var bdayStr = userInput.value;
+
+//     if (bdayStr!==""){
+//         var userDate = bdayStr.split("-");
+//         var date = {
+//             day : userDate[2],
+//             month : userDate[1],
+//             year : userDate[0]
+//         };
+//     }
+
+//     var isPalindrome = palindromeValidator(date);
+
+//     if(isPalindrome){
+//         result.innerText = "Your Birthday is a Palindrome";
+//     }else {
+//         var [ctr,nextDate] = getNextPalindrome(date);
+//         result.innerText = "The next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}. You missed it by ${ctr} days";
+//     }
+// }
+
+
+
 function reverseStr(str){
      var listOfchars = str.split('');
      var revStr = listOfchars.reverse();
@@ -35,12 +66,6 @@ function convertDatetoStr(date){
     dateStr.year = date.year.toString();
     return dateStr;
 }
-
-// var date = {
-//     day:5,
-//     month:9,
-//     year:1990
-// }
 
 function getAllformats(date){
     var dateStr = convertDatetoStr(date);
@@ -119,29 +144,44 @@ function getNextDate(date){
 }
 
 function getNextPalindrome(date){ // 1 1 2020
-    var abc = 0;
+    var ctr = 0;
     var nextDate = getNextDate(date); // 2 1 2020
 
     while(1){
-        abc++; // abc = 1
-        var isPalindrome = palindromeValidator(date); // false
+        ctr++; // abc = 1
+        var isPalindrome = palindromeValidator(nextDate);
         if(isPalindrome){
             break;
         }
         nextDate = getNextDate(nextDate);
     }
 
-    return [abc , nextDate];
+    return [ctr,nextDate];
 }
 
 
+btnClick.addEventListener("click",clickHandler);
 
-var date = {
-    day:15,
-    month:9,
-    year:2021
+function clickHandler(){
+    var bdayStr = userInput.value;
+
+    if (bdayStr!==""){
+        var userDate = bdayStr.split("-");
+        var date = {
+            day : userDate[2],
+            month : userDate[1],
+            year : userDate[0]
+        };
+    }
+
+    var isPalindrome = palindromeValidator(date);
+
+    if(isPalindrome){
+        result.innerText = "Your Birthday is a Palindrome";
+        console.log("is palindrome working");
+    }else {
+       var [ctr,nextDate] = getNextPalindrome(date);
+    result.innerText = "The next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}. You missed it by ${ctr} days";
+    console.log("not working");
+    }
 }
-
-console.log(getNextPalindrome(date));
-
-// 12 - 02 - 2020 is a palindrome date
