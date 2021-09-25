@@ -59,7 +59,7 @@ function palindromeValidator(date){
 
     var flag  = false;
     for(i=0;i<listOfPalindrome.length;i++){
-        if(isPalindrome(listOfPalindrome[i])){
+        if(palindrome(listOfPalindrome[i])){
             flag = true;
             break;
         }
@@ -67,11 +67,81 @@ function palindromeValidator(date){
     return flag;
 }
 
-
-var date = {
-    day:5,
-    month:9,
-    year:1990
+function isLeapYear(year){
+    if(year%400 === 0){
+        return true;
+    }
+    if(year%100===0){
+        return false;
+    }
+    if(year%4===0){
+        return true;
+    }
+    return false;
 }
 
-console.log(palindromeValidator(date));
+
+
+function getNextDate(date){
+    var day = date.day+1;
+    var month = date.month;
+    var year = date.year;
+
+    var daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+    if(month === 2){
+        if(isLeapYear(year)){
+            if(day>29){
+                day = 1;
+                month++;
+            }
+        }else{
+            if(day>28){
+                day = 1;
+                month++;
+            }
+        }
+    }else {
+        if(day > daysInMonth[month-1]){
+            day = 1;
+            month++;
+        }
+    }
+    if(month>12){
+        month = 1;
+        year++;
+    }
+    return {
+        day : day,
+        month : month,
+        year : year
+    }
+}
+
+function getNextPalindrome(date){ // 1 1 2020
+    var abc = 0;
+    var nextDate = getNextDate(date); // 2 1 2020
+
+    while(1){
+        abc++; // abc = 1
+        var isPalindrome = palindromeValidator(date); // false
+        if(isPalindrome){
+            break;
+        }
+        nextDate = getNextDate(nextDate);
+    }
+
+    return [abc , nextDate];
+}
+
+
+
+var date = {
+    day:15,
+    month:9,
+    year:2021
+}
+
+console.log(getNextPalindrome(date));
+
+// 12 - 02 - 2020 is a palindrome date
