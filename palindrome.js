@@ -162,7 +162,7 @@ function getNextPalindrome(date){ // 1 1 2020
 
 btnClick.addEventListener("click",clickHandler);
 
-function clickHandler(){
+function clickHandler(e){
     var bdayStr = userInput.value;
 
     if (bdayStr!==""){
