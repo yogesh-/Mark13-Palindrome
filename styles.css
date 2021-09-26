@@ -1,0 +1,15 @@
+.container{
+        margin: auto;
+        background: rgb(245, 214, 214);
+        border-radius: 5px;
+        text-align: center;
+        border: 1px solid black;
+        display: block;
+}
+
+.hydra{
+    display: block;
+    margin-bottom: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+}

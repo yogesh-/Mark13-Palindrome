@@ -83,6 +83,7 @@ function palindromeValidator(date){
     var listOfPalindrome = getAllformats(date);
 
     var flag  = false;
+    var i = 0;
     for(i=0;i<listOfPalindrome.length;i++){
         if(palindrome(listOfPalindrome[i])){
             flag = true;
@@ -143,12 +144,12 @@ function getNextDate(date){
     }
 }
 
-function getNextPalindrome(date){ // 1 1 2020
+function getNextPalindrome(date){
     var ctr = 0;
-    var nextDate = getNextDate(date); // 2 1 2020
+    var nextDate = getNextDate(date);
 
     while(1){
-        ctr++; // abc = 1
+        ctr++;
         var isPalindrome = palindromeValidator(nextDate);
         if(isPalindrome){
             break;
@@ -168,9 +169,9 @@ function clickHandler(e){
     if (bdayStr!==""){
         var userDate = bdayStr.split("-");
         var date = {
-            day : userDate[2],
-            month : userDate[1],
-            year : userDate[0]
+            day : Number(userDate[2]),
+            month : Number(userDate[1]),
+            year : Number(userDate[0])
         };
     }
 
@@ -178,10 +179,10 @@ function clickHandler(e){
 
     if(isPalindrome){
         result.innerText = "Your Birthday is a Palindrome";
-        console.log("is palindrome working");
+        console.log("palindrome is working");
     }else {
        var [ctr,nextDate] = getNextPalindrome(date);
-    result.innerText = "The next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}. You missed it by ${ctr} days";
+    result.innerText = `The next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year}. You missed it by ${ctr} days`;
     console.log("not working");
     }
 }
